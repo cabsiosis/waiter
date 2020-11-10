@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+html, body {
+    overflow-x: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    font-family: 'Montserrat', sans-serif;
+}
+body {
+    background-color: rgb(24, 24, 24);
+}
+#cartButton {
+    position: fixed;
+    z-index: 2;
+    top: 10%;
+    right: 10px;
+    padding: 10px;
+    border: white 1px solid;
+    border-radius: 30px;
+    color: white;
+}
+#cart {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    height: 100vh;
+    width: 25vw;
+    right: 0px;
+    background-color: white;
+}
+.foodCategory {
+    margin: 10px;
+    width: 30%;
+    color: white;
+    font-size: 5em;
+    border: white 2px;
+    border-style: none none solid none;
+}
+#itemCollection {
+    margin: 10px;
+}
+.itemCard {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    width: 20%;
+    text-align: center;
+    background-color: white;
+    border: rgb(207, 207, 207) 5px solid;
+    border-radius: 20px;
+}

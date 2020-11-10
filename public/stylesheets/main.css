@@ -1,12 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 html, body {
-    overflow: hidden;
+    overflow-x: hidden;
     height: 100vh;
     width: 100vw;
+    display: grid;
+    font-family: 'Montserrat', sans-serif;
 }
 body {
-    background-color: rgb(75, 132, 255);
+    background-color: rgb(24, 24, 24);
+}
+#choices {
+    margin: auto;
+    vertical-align: middle;
+    height: 95%;
+    width: 95%;
 }
 .userChoice {
-    border: black 1px solid;
-    border-radius: 20px;
+    display: grid;
+    margin: 5% 20% 5% 20%;
+    padding: 7.5%;
+    border: rgb(0,249,255) 10px solid;
+    border-image: linear-gradient(135deg, rgba(0,249,255,1) 0%, rgba(0,71,247,1) 68%, rgba(239,0,255,1) 100%);
+    border-image-slice: 1;
+    background-color: rgba(255, 255, 255, 0);
+    letter-spacing: 1.5em;
+    transition: all 0.5s ease-in-out;
+}
+.userChoice:hover {
+    border-width: 3px;
+    letter-spacing: 2em;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+.userChoice:active {
+    border-image-outset: 5px;
+}
+.userLabel {
+    margin: auto;
+    font-size: 150%;
+    
+    color: white;
+}
+
+/* animations */
+@keyframes rotateBorder {
+    100% { transform: rotate(1turn); }
 }
