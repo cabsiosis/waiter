@@ -10,35 +10,12 @@
 </head>
 
 <body>
-    <div id="cartButton">Cart</div>
+    <div id="cartArea"></div>
     <div id="cart"></div>
     <div id="itemCollection">
-        <div id="meals">
+        <div id="meal">
             <div class="foodCategory">Meals</div>
-            <div class="itemCard">
-                <div class="itemName">Item #1</div>
-                <div class="itemPrice">$100</div>
-            </div>
-            <div class="itemCard">
-                <div class="itemName">Item #1</div>
-                <div class="itemPrice">$100</div>
-            </div>
-            <div class="itemCard">
-                <div class="itemName">Item #1</div>
-                <div class="itemPrice">$100</div>
-            </div>
-            <div class="itemCard">
-                <div class="itemName">Item #1</div>
-                <div class="itemPrice">$100</div>
-            </div>
-            <div class="itemCard">
-                <div class="itemName">Item #1</div>
-                <div class="itemPrice">$100</div>
-            </div>
-            <div class="itemCard">
-                <div class="itemName">Item #1</div>
-                <div class="itemPrice">$100</div>
-            </div>
+            
         </div>
     </div>
 </body>
