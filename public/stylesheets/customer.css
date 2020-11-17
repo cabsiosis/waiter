@@ -8,6 +8,7 @@ html, body {
     font-family: 'Montserrat', sans-serif;
 }
 body {
+    display: none;
     background-color: rgb(24, 24, 24);
 }
 #cartArea {
@@ -31,6 +32,40 @@ body {
     background-color: white;
     border-radius: 30px 0 0 30px;
 }
+#cartWrapper {
+    display: grid;
+    height: 100%;
+    width: 100%;
+}
+#cartItemContainer {
+    margin: auto;
+    height: 95%;
+    width: 95%;
+    border: black 2px solid;
+    border-radius: 30px 0 0 30px;
+}
+#cartItemContainer table {
+    padding: 5%;
+    text-align: justify;
+}
+.row {
+    padding: 5%;
+}
+#totalPrice {
+    float: inline-start;
+}
+#orderButton {
+    width: 20%;
+    padding: 5%;
+    float: inline-end;
+    border: black 1.5px solid;
+    border-radius: 30px;
+    background-color: rgb(78, 255, 78);
+    transition: all ease-in-out 0.5s;
+}
+#orderButton:hover {
+    background-color: rgb(54, 179, 54);
+}
 .foodCategory {
     margin: 10px;
     width: 30%;
@@ -38,6 +73,9 @@ body {
     font-size: 5em;
     border: white 2px;
     border-style: none none solid none;
+}
+.foodCategory div {
+    user-select: none;
 }
 #itemCollection {
     margin: 10px;
@@ -49,6 +87,21 @@ body {
     width: 20%;
     text-align: center;
     background-color: white;
-    border: rgb(207, 207, 207) 5px solid;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    border: rgb(207, 207, 207) 5px;
+    border-style: none none solid none;
     border-radius: 20px;
+    transition: all ease-in-out 0.25s;
+}
+.itemCard:hover {
+    border-color: rgb(3, 217, 255);
+}
+.itemName .itemPrice {
+    pointer-events: none;
+}
+.itemOptions {
+    display: none;
+}
+.amountForm {
+    width: 75%;
 }
