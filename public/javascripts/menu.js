@@ -1,9 +1,12 @@
 $(document).ready(function () {
-    let currency = '$';
+    let currency = '$'; 
+    let orderID = 0;    //subject to change
+
+    // get items from db on page load
     $('body').fadeIn(750, function () {
         $.ajax({
             type: 'GET',
-            url: '../db/db.php',
+            url: '../server/db.php',
             dataType: 'JSON',
             success: (data) => {
                 for (var el of data) {
@@ -27,12 +30,23 @@ $(document).ready(function () {
             }
         });
 
-        $('#cartArea').hover(function () {
-            $('#cart').show('slide', { direction: 'right', easing: 'swing', duration: '250' });
-        }, function () {
-            $('#cart').hide('slide', { direction: 'right', easing: 'swing', duration: '250' });
+        // toggle cart on or off
+        let isCart = false;
+        $('body').on('click', function(e) {
+            let targetChildren = Object.values($(e.target).find('*'));
+            let cartChildren = Object.values($('#cart').find('*'));
+            
+            // still needs fixing but main function works
+            if (!cartChildren.some(q => targetChildren.includes(q))) { isCart = false; } 
+            if (e.target.id === 'cartArea') { isCart = true; }
+            if (isCart === true) {
+                $('#cart').show('slide', { direction: 'right', easing: 'swing', duration: '250' });
+            } else {
+                $('#cart').hide('slide', { direction: 'right', easing: 'swing', duration: '250' });
+            }
         })
 
+        // card selector handler
         let isSelected = true;
         $('#itemCollection').on('click', '.itemCard', function (e) {  
             let selectedItem = e.target;         
@@ -54,6 +68,7 @@ $(document).ready(function () {
             isSelected = !isSelected;
         });
 
+        // add cart items
         let cartTotal = 0;
         $('#itemCollection').on('click', '.addButton', function(e) {
             let itemName = $(e.target).parents('.itemOptions').siblings('.itemName');
@@ -72,8 +87,28 @@ $(document).ready(function () {
             $('#totalPrice').html('Total: ' + currency + String(cartTotal));
         });
 
+        // order handler
         $('#orderButton').on('click', function(e) {
-            console.log('order!');
+            if (cartTotal > 0) {
+                $.ajax({
+                    type: 'POST',
+                    url: '../server/order.php',
+                    data: {
+                        orderID: 'order#' + orderID,
+                        due: cartTotal,
+                        orderState: 'PENDING'
+                    },
+                    success: (data) => {
+                        console.log(data);
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    }
+                });
+            }
+            orderID++;  // subject to change
         })
+
+        
     });
 });

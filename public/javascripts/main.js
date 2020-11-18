@@ -10,8 +10,6 @@ $(document).ready(function() {
                     break;
                 case 'Staff':
                     break;
-                case 'Owner':
-                    break;
                 default:
                     break;
             }
