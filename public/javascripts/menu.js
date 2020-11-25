@@ -12,8 +12,8 @@ $(document).ready(function () {
                 for (var el of data) {
                     let productCard =
                         `<div class="itemCard">
-                            <div class="itemName">${el.name}</div>
-                            <div class="itemPrice">${currency + el.price}</div>
+                            <div class="itemName">${el.f_name}</div>
+                            <div class="itemPrice">${el.f_currency + el.f_price}</div>
                             <div class="itemOptions">
                                 <form class="itemForm">
                                     <label class="formLabel" for="amountForm">Amount: </label>
@@ -22,11 +22,12 @@ $(document).ready(function () {
                                 </form>
                             </div>
                         </div>`
-                    $('#' + el.type).append(productCard);
+                    $('#' + el.f_type).append(productCard);
                 }
+                console.log(data);
             },
             error: (err) => {
-                console.log('error:' + err);
+                console.log(err);
             }
         });
 

@@ -9,9 +9,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $conn = new mysqli($hostname, $username, $password, 'waiter');
     if ($conn->connect_error) {
         die('conn failed:' . $conn->connect_error);
-    }
+    } 
 
-    $query = 'SELECT * FROM fooditems';
+    $query = 'SELECT f_name, f_type, f_price, f_currency, f_stock, f_image
+    FROM foodnames
+    INNER JOIN foodtype
+    ON foodnames.id = foodtype.id
+    INNER JOIN foodprice 
+    ON foodtype.id = foodprice.id
+    INNER JOIN foodstock
+    ON foodprice.id = foodstock.id
+    INNER JOIN foodimages
+    ON foodstock.id = foodimages.id';    
+    // idk how to join to food type
+
     $res = mysqli_query($conn, $query);
     $queryArr = array();
 
