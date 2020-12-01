@@ -6,21 +6,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $username = 'root';
     $password = '';
 
-    $conn = new mysqli($hostname, $username, $password, 'waiter');
+    $conn = new mysqli($hostname, $username, $password, 'waiter-production');
     if ($conn->connect_error) {
         die('conn failed:' . $conn->connect_error);
     } 
 
-    $query = 'SELECT f_name, f_type, f_price, f_currency, f_stock, f_image
-    FROM foodnames
+    $query = 'SELECT f_name, f_type, f_price, f_currency, f_stock
+    FROM foodname
     INNER JOIN foodtype
-    ON foodnames.id = foodtype.id
+    ON foodname.id = foodtype.id
     INNER JOIN foodprice 
     ON foodtype.id = foodprice.id
     INNER JOIN foodstock
-    ON foodprice.id = foodstock.id
-    INNER JOIN foodimages
-    ON foodstock.id = foodimages.id';    
+    ON foodprice.id = foodstock.id';    
     // idk how to join to food type
 
     $res = mysqli_query($conn, $query);

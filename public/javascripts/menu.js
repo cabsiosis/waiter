@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let currency = '$'; 
+    let currency;
     let orderID = 0;    //subject to change
 
     // get items from db on page load
@@ -10,6 +10,7 @@ $(document).ready(function () {
             dataType: 'JSON',
             success: (data) => {
                 for (var el of data) {
+                    currency = el.f_currency;
                     let productCard =
                         `<div class="itemCard">
                             <div class="itemName">${el.f_name}</div>
@@ -76,6 +77,7 @@ $(document).ready(function () {
             let formElem = $(e.target).siblings('.itemAmount');
             let itemPrice = $(e.target).parents('.itemOptions').siblings('.itemPrice').html().replace(currency, '');
             let totalPrice = parseInt(itemPrice) * $(formElem).val();
+            console.log(itemPrice);
             cartTotal += totalPrice;
 
             let cartTableElem = 

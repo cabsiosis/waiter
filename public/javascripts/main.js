@@ -9,6 +9,7 @@ $(document).ready(function() {
                     window.location.href = 'views/customer.html';
                     break;
                 case 'Staff':
+                    window.location.href = 'views/staff.html';
                     break;
                 default:
                     break;
