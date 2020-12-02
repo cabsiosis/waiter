@@ -25,7 +25,6 @@ $(document).ready(function () {
                         </div>`
                     $('#' + el.f_type).append(productCard);
                 }
-                console.log(data);
             },
             error: (err) => {
                 console.log(err);
@@ -72,12 +71,12 @@ $(document).ready(function () {
 
         // add cart items
         let cartTotal = 0;
+        let orderItems = [];
         $('#itemCollection').on('click', '.addButton', function(e) {
-            let itemName = $(e.target).parents('.itemOptions').siblings('.itemName');
             let formElem = $(e.target).siblings('.itemAmount');
+            let itemName = $(e.target).parents('.itemOptions').siblings('.itemName');
             let itemPrice = $(e.target).parents('.itemOptions').siblings('.itemPrice').html().replace(currency, '');
             let totalPrice = parseInt(itemPrice) * $(formElem).val();
-            console.log(itemPrice);
             cartTotal += totalPrice;
 
             let cartTableElem = 
@@ -86,6 +85,8 @@ $(document).ready(function () {
                     <td>${$(formElem).val()}</td>
                     <td>${totalPrice}</td>
                 </tr>`
+
+            orderItems.push([itemName.html(), $(formElem).val()]);
             $('#cartItemContainer table tbody').append(cartTableElem);
             $('#totalPrice').html('Total: ' + currency + String(cartTotal));
         });
@@ -94,22 +95,33 @@ $(document).ready(function () {
         $('#orderButton').on('click', function(e) {
             if (cartTotal > 0) {
                 $.ajax({
-                    type: 'POST',
-                    url: '../server/order.php',
-                    data: {
-                        orderID: 'order#' + orderID,
-                        due: cartTotal,
-                        orderState: 'PENDING'
-                    },
+                    type: 'GET',
+                    url: '../server/order_2.php',
                     success: (data) => {
-                        console.log(data);
+                        let orderObj = JSON.parse(data); 
+                        orderID = parseInt(orderObj[0].maxID);
+                        if (isNaN(orderID)) { orderID = 0; }
+                        $.ajax({
+                            type: 'POST',
+                            url: '../server/order_1.php',
+                            data: {
+                                orderID: ++orderID,
+                                items: JSON.stringify(orderItems),
+                                due: cartTotal,
+                                orderState: 'PENDING'
+                            },
+                            success: (data) => {
+                                console.log(data);
+                            },
+                            error: (err) => {
+                                console.log(err);
+                            }
+                        });
                     },
-                    error: (err) => {
-                        console.log(err);
-                    }
+                    error: (err) => { console.log(err); }
                 });
+                
             }
-            orderID++;  // subject to change
         })
 
         

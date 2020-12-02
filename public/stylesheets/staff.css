@@ -9,9 +9,9 @@ html, body {
 }
 body {
     display: none;
-    background-color: rgb(24, 24, 24);
 }
 #content {
+    background-color: rgb(24, 24, 24);
     display: grid;
     height: 100%;
     width: 100%;
@@ -19,16 +19,6 @@ body {
 #orderList {
     margin: auto;
     border: black 1px solid;
-}
-#orderList thead {
-    background-color: rgb(230, 228, 228);
-}
-#orderList tbody {
-    background-color: rgb(206, 205, 205);
-    
-}
-#orderList td {
-    width: 20%;
 }
 #orderAction {
     display: inline-flex;
