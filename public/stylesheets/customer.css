@@ -106,5 +106,6 @@ body {
     width: 75%;
 }
 .foodImage {
-    
+    max-width: 100%;
+    max-height: 100%;
 }

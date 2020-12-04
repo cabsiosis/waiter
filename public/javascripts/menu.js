@@ -13,7 +13,7 @@ $(document).ready(function () {
                     currency = el.f_currency;
                     let productCard =
                         `<div class="itemCard">
-                            <iframe src="${el.f_image} class="foodImage"></iframe>
+                            <img src="${el.f_image}" class="foodImage"  />
                             <div class="itemName">${el.f_name}</div>
                             <div class="itemPrice">${el.f_currency + el.f_price}</div>
                             <div class="itemOptions">
@@ -37,7 +37,6 @@ $(document).ready(function () {
         $('body').on('click', function(e) {
             let targetChildren = Object.values($(e.target).find('*'));
             let cartChildren = Object.values($('#cart').find('*'));
-            
             // still needs fixing but main function works
             if (!cartChildren.some(q => targetChildren.includes(q))) { isCart = false; } 
             if (e.target.id === 'cartArea') { isCart = true; }
