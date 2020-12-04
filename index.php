@@ -14,6 +14,9 @@
             <div class="userChoice">
                 <div class="userLabel">Staff</div>
             </div>
+            <div class="userChoice">
+                <div class="userLabel">Owner</div>
+            </div>
         </div>
         
     </body>

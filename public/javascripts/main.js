@@ -11,6 +11,9 @@ $(document).ready(function() {
                 case 'Staff':
                     window.location.href = 'views/staff.html';
                     break;
+                case 'Owner':
+                    window.location.href = 'views/owner.html';
+                    break;
                 default:
                     break;
             }

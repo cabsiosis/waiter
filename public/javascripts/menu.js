@@ -13,6 +13,7 @@ $(document).ready(function () {
                     currency = el.f_currency;
                     let productCard =
                         `<div class="itemCard">
+                            <iframe src="${el.f_image} class="foodImage"></iframe>
                             <div class="itemName">${el.f_name}</div>
                             <div class="itemPrice">${el.f_currency + el.f_price}</div>
                             <div class="itemOptions">
@@ -52,7 +53,7 @@ $(document).ready(function () {
         $('#itemCollection').on('click', '.itemCard', function (e) {  
             let selectedItem = e.target;         
             let targetClass = $(e.target).attr('class');
-            let ignoreArr = ['itemName', 'itemPrice', 'itemOptions', 'itemForm', 'formLabel', 'itemAmount', 'addButton'];
+            let ignoreArr = ['foodImage','itemName', 'itemPrice', 'itemOptions', 'itemForm', 'formLabel', 'itemAmount', 'addButton'];
             if (isSelected) {
                 if (ignoreArr.some(q => targetClass.includes(q))) {
                     selectedItem = $(e.target).parent('.itemCard');
@@ -71,9 +72,10 @@ $(document).ready(function () {
 
         // add cart items
         let cartTotal = 0;
-        let orderItems = [];
+        let orderItems = "";
         $('#itemCollection').on('click', '.addButton', function(e) {
             let formElem = $(e.target).siblings('.itemAmount');
+            let itemAmount = $(formElem).val();
             let itemName = $(e.target).parents('.itemOptions').siblings('.itemName');
             let itemPrice = $(e.target).parents('.itemOptions').siblings('.itemPrice').html().replace(currency, '');
             let totalPrice = parseInt(itemPrice) * $(formElem).val();
@@ -86,7 +88,7 @@ $(document).ready(function () {
                     <td>${totalPrice}</td>
                 </tr>`
 
-            orderItems.push([itemName.html(), $(formElem).val()]);
+            orderItems += itemName.html() + ':' + itemAmount + ',';
             $('#cartItemContainer table tbody').append(cartTableElem);
             $('#totalPrice').html('Total: ' + currency + String(cartTotal));
         });
@@ -94,6 +96,7 @@ $(document).ready(function () {
         // order handler
         $('#orderButton').on('click', function(e) {
             if (cartTotal > 0) {
+                console.log(orderItems);
                 $.ajax({
                     type: 'GET',
                     url: '../server/order_2.php',
@@ -106,7 +109,7 @@ $(document).ready(function () {
                             url: '../server/order_1.php',
                             data: {
                                 orderID: ++orderID,
-                                items: JSON.stringify(orderItems),
+                                items: orderItems,
                                 due: cartTotal,
                                 orderState: 'PENDING'
                             },

@@ -5,7 +5,6 @@ $(document).ready(function() {
             url: '../server/order_1.php',
             dataType: 'JSON',
             success: (data) => {
-                console.log(data);
                 for (var el of data) {
                     let orderRow = 
                     `<tr>
@@ -48,7 +47,7 @@ $(document).ready(function() {
             // add to owner statistic report
             $.ajax({
                 type: 'POST',
-                url: '../server/statistic.php',
+                url: '../server/statistic-profit.php',
                 data: {
                     id: resolveObj.html(),
                     cost: costObj.html(),
@@ -63,11 +62,13 @@ $(document).ready(function() {
         });
         $('tbody').on('click', '.orderVoid', function(e) {
             let voidObj = $(e.target).parent().siblings('.orderID');
+            let statusObj = $(e.target).parent().siblings('.orderStatus');
+            statusObj.html('VOIDED');
 
             // delete from orderlist
             $.ajax({
                 type: 'POST',
-                url: '../server/order_2.php',
+                url: '../server/voidOrder.php',
                 data: {
                     id: voidObj.html()
                 },

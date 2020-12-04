@@ -1,16 +1,14 @@
 <?php
-// get orders
 $hostname = '127.0.0.1';
 $username = 'root';
 $password = '';
-
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $conn = new mysqli($hostname, $username, $password, 'waiter-production');
     if ($conn->connect_error) {
         die('conn failed:' . $conn->connect_error);
     }
 
-    $query = "SELECT id, cost, orderState, items FROM orderlist";
+    $query = "SELECT gained, dateAchieved FROM statistics_history";
     $res = mysqli_query($conn, $query);
     $queryArr = array();
 
@@ -20,21 +18,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
     }
 
-    $conn->close();
     echo json_encode($queryArr);
+    $conn->close();
 }
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $orderID = $_POST['orderID'];
-    $due = $_POST['due'];
-    $orderState = $_POST['orderState'];
-    $items = $_POST['items'];
+    $itemID = $_POST['id'];
+    $itemPrice = $_POST['cost'];
 
     $conn = new mysqli($hostname, $username, $password, 'waiter-production');
     if ($conn->connect_error) {
         die('conn failed:' . $conn->connect_error);
     }
 
-    $query = "INSERT INTO orderlist(id, cost, orderState, items) VALUES('$orderID', '$due', '$orderState', '$items')";
+    $query = "INSERT INTO statistics_history(id, gained, dateAchieved) VALUES('$itemID', '$itemPrice', now())";
     if (mysqli_query($conn, $query)) {
         echo "Order Item Stored Successfully!";
     } else { echo "err: " . mysqli_error($conn); }

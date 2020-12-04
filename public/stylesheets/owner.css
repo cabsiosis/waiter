@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+html, body {
+    overflow-x: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    font-family: 'Montserrat', sans-serif;
+}
+body {
+    display: none;
+}
+#content {
+    background-color: rgb(24, 24, 24);
+    display: grid;
+    height: 100%;
+    width: 100%;
+}
+#statsList {
+    margin: auto;
+    border: black 1px solid;
+}
+#profitsList {
+    margin: auto;
+    border: black 1px solid;
+}
